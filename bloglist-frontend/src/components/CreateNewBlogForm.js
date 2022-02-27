@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import blogService from '../services/blogs'
+import PropTypes from 'prop-types'
 
 const CreateNewBlogForm = ({
   blogs, setBlogs, toggleCreateBlogFormVisibility
@@ -63,6 +64,12 @@ const CreateNewBlogForm = ({
       </form>
     </div>
   )
+}
+
+CreateNewBlogForm.propTypes = {
+  blogs: PropTypes.array.isRequired,
+  setBlogs: PropTypes.func.isRequired,
+  toggleCreateBlogFormVisibility: PropTypes.func.isRequired
 }
 
 export default CreateNewBlogForm

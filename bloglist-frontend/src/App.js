@@ -98,7 +98,9 @@ const App = () => {
     <div>
       <h2>blogs</h2>
       <p>{user.name} logged in</p><button onClick={handleLogOut}>logout</button>
-      <button onClick={toggleCreateBlogFormVisibility}>new blog</button>
+      {
+        !createBlogFormIsVisible && <button onClick={toggleCreateBlogFormVisibility}>new blog</button>
+      }
       {
         createBlogFormIsVisible ?
           <CreateNewBlogForm
