@@ -14,6 +14,7 @@ const App = () => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
+  const [createBlogFormIsVisible, setCreateBlogFormIsVisible] = useState(false)
 
 
   useEffect(() => {
@@ -60,6 +61,10 @@ const App = () => {
     setPassword('')
   }
 
+  const toggleCreateBlogFormVisibility = () => {
+    setCreateBlogFormIsVisible(!createBlogFormIsVisible)
+  }
+
   if (user === null) {
     return (
       <div>
@@ -93,15 +98,23 @@ const App = () => {
     <div>
       <h2>blogs</h2>
       <p>{user.name} logged in</p><button onClick={handleLogOut}>logout</button>
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
-      )}
-      <CreateNewBlogForm
-        title={title} setTitle={setTitle}
-        author={author} setAuthor={setAuthor}
-        url={url} setUrl={setUrl}
-        blogs={blogs} setBlogs={setBlogs}
-      />
+      <button onClick={toggleCreateBlogFormVisibility}>new blog</button>
+      {
+        createBlogFormIsVisible ?
+          <CreateNewBlogForm
+            title={title} setTitle={setTitle}
+            author={author} setAuthor={setAuthor}
+            url={url} setUrl={setUrl}
+            blogs={blogs} setBlogs={setBlogs}
+            toggleCreateBlogFormVisibility={toggleCreateBlogFormVisibility}
+          />
+          :
+          blogs.map(blog =>
+            <Blog key={blog.id} blog={blog} />
+          )
+      }
+
+
     </div>
   )
 }

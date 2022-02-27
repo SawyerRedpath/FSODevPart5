@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import blogService from '../services/blogs'
 
 const CreateNewBlogForm = ({
-  title, setTitle, author, setAuthor, url, setUrl, blogs, setBlogs
+  blogs, setBlogs, toggleCreateBlogFormVisibility
 }) => {
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
+  const [url, setUrl] = useState('')
+
   const resetFormInputs = () => {
     setTitle('')
     setAuthor('')
@@ -21,7 +25,8 @@ const CreateNewBlogForm = ({
 
     const newBlog = await blogService.create(blogObject)
     setBlogs(blogs.concat(newBlog))
-    resetFormInputs();
+    resetFormInputs()
+    toggleCreateBlogFormVisibility()
   }
 
 
@@ -54,6 +59,7 @@ const CreateNewBlogForm = ({
             onChange={({ target }) => setUrl(target.value)} />
         </div>
         <button type="submit">create</button>
+        <button type="button" onClick={toggleCreateBlogFormVisibility}>cancel</button>
       </form>
     </div>
   )
